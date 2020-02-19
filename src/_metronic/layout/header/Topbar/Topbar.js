@@ -7,11 +7,20 @@ import UserNotifications from "../../../../app/partials/layout/UserNotifications
 import UserProfile from "../../../../app/partials/layout/UserProfile";
 import LanguageSelector from "../../../../app/partials/layout/LanguageSelector";
 import { toAbsoluteUrl } from "../../../utils/utils";
+import { connect } from "react-redux";
 
-export default class Topbar extends React.Component {
+class Topbar extends React.Component {
   render() {
+    const {user} = this.props;
+    let userProfileBtn;
+    if(user){
+      userProfileBtn = <UserProfile showAvatar={false} showHi={true} showBadge={true} user={user} />;
+    }else{
+      userProfileBtn = <div>login</div>
+    }
+
     return (
-        <div className="kt-header__topbar">
+      <div className="kt-header__topbar">
 
         <MyCart
           icon={toAbsoluteUrl("/media/icons/svg/Shopping/Cart%233.svg")}
@@ -45,8 +54,15 @@ export default class Topbar extends React.Component {
 
         <LanguageSelector iconType="" />
 
-        <UserProfile showAvatar={false} showHi={true} showBadge={true} />
+        {userProfileBtn}
+
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ auth: { user } }) => ({
+  user
+});
+
+export default connect(mapStateToProps)(Topbar);

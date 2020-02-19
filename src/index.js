@@ -1,45 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+/**
+ * Create React App entry point. This and `public/index.html` files can not be
+ * changed or moved.
+ */
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import store, { persistor } from "./app/store/store";
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import authReducer from './store/reducers/auth';
+import { setupAxios } from "./_metronic";
+import "./index.scss"; // Standard version
+// import "./sass/style.react.rtl.css"; // RTL version
+// IE 11 polyfills
+import "react-app-polyfill/ie11";
+import "react-app-polyfill/stable";
+// Fonts
+import "socicon/css/socicon.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./_metronic/_assets/plugins/line-awesome/css/line-awesome.css";
+import "./_metronic/_assets/plugins/flaticon/flaticon.css";
+import "./_metronic/_assets/plugins/flaticon2/flaticon.css";
+/**
+ * Base URL of the website.
+ *
+ * @see https://facebook.github.io/create-react-app/docs/using-the-public-folder
+ */
+const { PUBLIC_URL } = process.env;
 
 
-const rootReducer = combineReducers({
-    auth: authReducer
-});
+/**
+ * Inject metronic interceptors for axios.
+ *
+ * @see https://github.com/axios/axios#interceptors
+ */
+setupAxios(axios, store);
 
-//const persistedState = loadState(); ali : if we want to load state from local storage s
-
-//const store = createStore(
-//  app,
-//  persistedState
-//);
-
-
-const store = createStore(rootReducer);
-
-//ali : if we want to load state from local storage s
-//store.subscribe(() => {
-//    saveState({
-//      todos: store.getState().todos
-//    });
-//  });
-
-const app = (
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
+ReactDOM.render(
+    <App
+      store={store}
+      persistor={persistor}
+      basename={PUBLIC_URL}
+    />,
+  document.getElementById("root")
 );
-
-ReactDOM.render(app, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

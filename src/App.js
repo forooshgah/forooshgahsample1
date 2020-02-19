@@ -1,38 +1,41 @@
-import React from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import  Layout  from './hoc/layout/Layout'
-import home from './containers/home/home'
-import productGrid from './containers/product-grid/productGrid'
+/**
+ * Entry application component used to compose providers and render Routes.
+ *
+ * Note: Because of
+ */
 
-function App(props) {
-  let routes = (
-    <Switch>
-      {/* <Route path="/car" component={} />*/}
-      <Route path="/" exact component={home} /> 
-      <Route path="/Products" exact component={productGrid} /> 
-      <Redirect to="/" />
-    </Switch>
-  );
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { LastLocationProvider } from "react-router-last-location";
+import { Routes } from "./app/router/Routes";
+import { I18nProvider, LayoutSplashScreen, ThemeProvider } from "./_metronic";
 
-  if ( props.isAuthenticated ) {
-    routes = (
-      <Switch>
-        {/* <Route path="/checkout" component={} />
-        <Route path="/orders" component={} />
-        <Route path="/logout" component={} />
-        <Route path="/auth" component={} />
-        <Route path="/" exact component={} /> */}
-        <Redirect to="/" />
-      </Switch>
-    );
-  }
+export default function App({ store, persistor, basename }) {
   return (
-    <div>
-      <Layout>
-        {routes}
-      </Layout>
-    </div>
+      /* Provide Redux store */
+      <Provider store={store} loading={<LayoutSplashScreen />}>
+        {/* Asynchronously persist redux stores and show `SplashScreen` while it's loading. */}
+        <PersistGate persistor={persistor}>
+          {/* Add high level `Suspense` in case if was not handled inside the React tree. */}
+          <React.Suspense fallback={<LayoutSplashScreen />}>
+            {/* Override `basename` (e.g: `homepage` in `package.json`) */}
+            <BrowserRouter basename={basename}>
+                {/*This library only returns the location that has been active before the recent location change in the current window lifetime.*/}
+                <LastLocationProvider>
+                  {/* Provide Metronic theme overrides. */}
+                  <ThemeProvider>
+                    {/* Provide `react-intl` context synchronized with Redux state.  */}
+                    <I18nProvider>
+                      {/* Render routes with provided `Layout`. */}
+                      <Routes />
+                    </I18nProvider>
+                  </ThemeProvider>
+                </LastLocationProvider>
+            </BrowserRouter>
+          </React.Suspense>
+        </PersistGate>
+      </Provider>
   );
 }
-
-export default App;
