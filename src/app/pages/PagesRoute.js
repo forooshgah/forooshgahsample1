@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Builder from "./home/Builder";
 import Dashboard from "./home/Dashboard";
+import Home from "./home/Home"
 import { LayoutSplashScreen } from "../../_metronic";
 
 // const GoogleMaterialPage = lazy(() =>
@@ -15,10 +16,8 @@ export default function PagesRoute() {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
-        {
-          /* Redirect from root URL to /dashboard. */
-          <Redirect exact from="/" to="/dashboard" />
-        }
+
+        <Route path="/" exact component={Home} />
         <Route path="/builder" component={Builder} />
         <Route path="/dashboard" component={Dashboard} />
 
