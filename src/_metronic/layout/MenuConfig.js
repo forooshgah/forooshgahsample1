@@ -6,7 +6,7 @@ export default {
         title: "Home",
         root: true,
         alignment: "left",
-        page: "dashboard",
+        page: "home",
         translate: "MENU.DASHBOARD"
       },
       {

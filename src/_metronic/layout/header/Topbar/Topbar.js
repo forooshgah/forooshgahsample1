@@ -8,6 +8,7 @@ import UserProfile from "../../../../app/partials/layout/UserProfile";
 import LanguageSelector from "../../../../app/partials/layout/LanguageSelector";
 import { toAbsoluteUrl } from "../../../utils/utils";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Topbar extends React.Component {
   render() {
@@ -16,7 +17,9 @@ class Topbar extends React.Component {
     if(user){
       userProfileBtn = <UserProfile showAvatar={false} showHi={true} showBadge={true} user={user} />;
     }else{
-      userProfileBtn = <div>login</div>
+      userProfileBtn = (
+        <Link to="/auth/login">login</Link>
+      );
     }
 
     return (
