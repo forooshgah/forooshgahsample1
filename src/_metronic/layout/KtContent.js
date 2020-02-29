@@ -7,12 +7,15 @@ function KtContent({ children, contentContainerClasses }) {
   let location = useLocation();
   const ref = useRef();
   useEffect(() => {
-    if (!ref && !ref.current) {
+    if (!ref || !ref.current) {
       return;
     }
 
     ref.current.classList.remove("kt-grid--animateContent-finished");
     setTimeout(() => {
+      if (!ref || !ref.current) {
+        return;
+      }
       ref.current.classList.add("kt-grid--animateContent-finished");
     }, 1);
   }, [location]);

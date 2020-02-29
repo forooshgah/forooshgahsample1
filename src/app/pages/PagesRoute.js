@@ -18,6 +18,7 @@ export default function PagesRoute() {
       <Switch>
 
         <Route path="/" exact component={Home} />
+        <Route path="/home" exact component={Home} />
         <Route path="/builder" component={Builder} />
         <Route path="/dashboard" component={Dashboard} />
 

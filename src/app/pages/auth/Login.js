@@ -15,6 +15,50 @@ function Login(props) {
     paddingRight: "2.5rem"
   });
 
+
+  const onValidate = values => {
+    const errors = {};
+
+    if (!values.email) {
+      // https://github.com/formatjs/react-intl/blob/master/docs/API.md#injection-api
+      errors.email = intl.formatMessage({
+        id: "AUTH.VALIDATION.REQUIRED_FIELD"
+      });
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+    ) {
+      errors.email = intl.formatMessage({
+        id: "AUTH.VALIDATION.INVALID_FIELD"
+      });
+    }
+
+    if (!values.password) {
+      errors.password = intl.formatMessage({
+        id: "AUTH.VALIDATION.REQUIRED_FIELD"
+      });
+    }
+
+    return errors;
+  };
+
+  const onSubmit = (values, { setStatus, setSubmitting }) => {
+    enableLoading();
+      login(values.email, values.password)
+        .then(({ data: { accessToken } }) => {
+          disableLoading();
+          props.login(accessToken);
+        })
+        .catch(() => {
+          disableLoading();
+          setSubmitting(false);
+          setStatus(
+            intl.formatMessage({
+              id: "AUTH.VALIDATION.INVALID_LOGIN"
+            })
+          );
+        });
+  };
+
   const enableLoading = () => {
     setLoading(true);
     setLoadingButtonStyle({ paddingRight: "3.5rem" });
@@ -51,49 +95,8 @@ function Login(props) {
               email: "admin@demo.com",
               password: "demo"
             }}
-            validate={values => {
-              const errors = {};
-
-              if (!values.email) {
-                // https://github.com/formatjs/react-intl/blob/master/docs/API.md#injection-api
-                errors.email = intl.formatMessage({
-                  id: "AUTH.VALIDATION.REQUIRED_FIELD"
-                });
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = intl.formatMessage({
-                  id: "AUTH.VALIDATION.INVALID_FIELD"
-                });
-              }
-
-              if (!values.password) {
-                errors.password = intl.formatMessage({
-                  id: "AUTH.VALIDATION.REQUIRED_FIELD"
-                });
-              }
-
-              return errors;
-            }}
-            onSubmit={(values, { setStatus, setSubmitting }) => {
-              enableLoading();
-              setTimeout(() => {
-                login(values.email, values.password)
-                  .then(({ data: { accessToken } }) => {
-                    disableLoading();
-                    props.login(accessToken);
-                  })
-                  .catch(() => {
-                    disableLoading();
-                    setSubmitting(false);
-                    setStatus(
-                      intl.formatMessage({
-                        id: "AUTH.VALIDATION.INVALID_LOGIN"
-                      })
-                    );
-                  });
-              }, 1000);
-            }}
+            validate={onValidate}
+            onSubmit={onSubmit}
           >
             {({
               values,
@@ -115,14 +118,7 @@ function Login(props) {
                     <div role="alert" className="alert alert-danger">
                       <div className="alert-text">{status}</div>
                     </div>
-                  ) : (
-                      <div role="alert" className="alert alert-info">
-                        <div className="alert-text">
-                          Use account <strong>admin@demo.com</strong> and password{" "}
-                          <strong>demo</strong> to continue.
-                    </div>
-                      </div>
-                    )}
+                  ) : null}
 
                   <div className="form-group">
                     <TextField
@@ -182,7 +178,7 @@ function Login(props) {
               )}
           </Formik>
 
-          <div className="kt-login__divider">
+          {/* <div className="kt-login__divider">
             <div className="kt-divider">
               <span />
               <span>OR</span>
@@ -203,7 +199,7 @@ function Login(props) {
               <i className="fab fa-google" />
               Google
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -33,13 +33,15 @@ export const Routes = withRouter(({ history }) => {
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>
       <Switch>
-        {!isAuthorized ? (
-          /* Render auth page when user at `/auth` and not authorized. */
+        {/* {!isAuthorized ? (
+          /* Render auth page when user at `/auth` and not authorized. /
           <Route path="/auth/login" component={AuthPage} />
         ) : (
-          /* Otherwise redirect to root page (`/`) */
+          /* Otherwise redirect to root page (`/`) /
           <Redirect from="/auth" to={userLastLocation} />
-        )}
+        )} */}
+
+        <Route path="/auth" component={AuthPage} />
 
         <Route path="/error" component={ErrorsPage} />
         <Route path="/logout" component={LogoutPage} />
