@@ -1,5 +1,5 @@
 $tile-height : 400px;
-$tile-img-height : $tile-height/3;
+$tile-img-height : $tile-height/2.5;
 
 
 
@@ -19,4 +19,33 @@ $tile-img-height : $tile-height/3;
     font-size: 1.5rem;
     font-family: Poppins, Helvetica, sans-serif;
     font-weight: bold;
+}
+
+.prod-tile-desc{
+    font-size: 0.9rem;
+    color: #505050;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.prod-tile-attrs{
+    
+    font-size: 0.8rem;
+    color: #707070;
+    height: 75px;
+    overflow: hidden;
+}
+.prod-tile-attrs ul{
+    padding-inline-start: 10px;
+}
+
+.prod-tile-price{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #c83131;
+}
+.prod-tile-addCart{
+    text-align: center;
 }

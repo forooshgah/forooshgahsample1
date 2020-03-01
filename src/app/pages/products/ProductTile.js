@@ -10,14 +10,18 @@ const ProductTile = (props) => {
             <div className="prod-tile-name">
                 {props.product.name}
             </div>
-            <div className="prod-tile-brand">
+            <div className="prod-tile-desc">
                 {props.product.brandName}
             </div>
-            <div className="prod-tile-attrs"></div>
-            <div className="prod-tile-price">{props.product.price}</div>
-            <div className="prod-tile-addCart">
-                <ProductTileAddToCart product={props.product} />
+            <div className="prod-tile-attrs">
+                <ul>
+                    <li>Lorem Ipsum placeholder text for use in your graphic</li>
+                    <li>placeholder text for use in your graphic</li>
+                    <li>text for use</li>
+                </ul>
             </div>
+            <div className="prod-tile-price">{props.product.price.toLocaleString()} $</div>
+            <ProductTileAddToCart product={props.product} />
         </div>
     );
 }
