@@ -5,14 +5,17 @@ import ProductTileAddToCart from "./productTileAddToCart";
 //
 const ProductTile = (props) => {
     return (
-        <div className="card" key={props.product.id}>
-            <div className="card-image">
-                <ProductTileImage product={props.product} />
+        <div className="prod-tile" key={props.product.id}>
+            <ProductTileImage product={props.product} />
+            <div className="prod-tile-name">
+                {props.product.name}
             </div>
-
-            <div className="card-content">
-                <p>{props.product.name}</p>
-                <p><b>Price: {props.product.price}$</b></p>
+            <div className="prod-tile-brand">
+                {props.product.brandName}
+            </div>
+            <div className="prod-tile-attrs"></div>
+            <div className="prod-tile-price">{props.product.price}</div>
+            <div className="prod-tile-addCart">
                 <ProductTileAddToCart product={props.product} />
             </div>
         </div>

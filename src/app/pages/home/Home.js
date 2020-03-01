@@ -21,10 +21,10 @@ const Home = () => {
             <ProductSearch text={filter.text} onSearchText={onSearchText} />
 
             <Grid container spacing={3}>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <ProductFilter />
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={10}>
                     <ProductList filter={filter} />
                 </Grid>
             </Grid>
