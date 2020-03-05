@@ -1,12 +1,12 @@
 import React from 'react'
-
+import baseService from "../../services/base.service"
 
 const ProductTileImage = (props) => {
     const mystyle = {
         width: "100%"
     };
     let mainImagePath = "/media/products/product4.jpg";
-    let baseUrl = "http://185.2.14.80:8094"; //TODO : from env
+    let baseUrl = baseService.baseUrl; //TODO : from env
 
 
     if (props.product.productImages.length > 0) {

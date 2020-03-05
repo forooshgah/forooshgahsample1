@@ -27,7 +27,7 @@ const ProductList = (props) => {
     } else {
 
         let prodInTiles = products.map(prod => 
-                <Grid item xs={3} key={prod.id}>
+                <Grid item xs={4} key={prod.id}>
                     <ProductTile product={prod} />
                 </Grid>
         );

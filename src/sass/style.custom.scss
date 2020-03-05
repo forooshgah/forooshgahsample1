@@ -1,5 +1,5 @@
-$tile-height : 400px;
-$tile-img-height : $tile-height/2.5;
+$tile-height : 540px;
+$tile-img-height : 289px;
 
 
 
@@ -8,7 +8,14 @@ $tile-img-height : $tile-height/2.5;
     box-shadow: 0px 0px 4px 5px #f5f5f5;
     background-color: #ffffff;
     height: $tile-height;
+    display: block;
+    transition: box-shadow .3s ease-in-out;
+    border-radius: 5px;
 }
+.prod-tile:hover{
+    box-shadow: 0px 0px 6px 6px #afafaf;
+}
+
 
 .prod-tile-image{
     width: 100%;
@@ -48,4 +55,14 @@ $tile-img-height : $tile-height/2.5;
 }
 .prod-tile-addCart{
     text-align: center;
+}
+
+
+.prod-detail-page{
+    min-height: 800px;
+    padding-bottom: 25px;
+}
+
+.btn{
+    cursor: pointer !important;
 }

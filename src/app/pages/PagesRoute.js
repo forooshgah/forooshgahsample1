@@ -4,6 +4,8 @@ import Builder from "./home/Builder";
 import Dashboard from "./home/Dashboard";
 import Home from "./home/Home"
 import { LayoutSplashScreen } from "../../_metronic";
+import ProductDetail from "./product-detail/Index";
+import Checkout from "./checkout/Index";
 
 // const GoogleMaterialPage = lazy(() =>
 //   import("./google-material/GoogleMaterialPage")
@@ -19,6 +21,12 @@ export default function PagesRoute() {
 
         <Route path="/" exact component={Home} />
         <Route path="/home" exact component={Home} />
+    
+        <Route path="/Product/:id" component={ProductDetail} />
+        <Route path="/checkout" component={Checkout} />
+
+
+
         <Route path="/builder" component={Builder} />
         <Route path="/dashboard" component={Dashboard} />
 

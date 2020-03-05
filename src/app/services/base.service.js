@@ -2,7 +2,8 @@ import axios from 'axios';
 
 class BaseService {
     
-    baseUrl = 'http://185.2.14.80:8094/api';
+    baseUrl = 'https://localhost:44312/';
+    //baseUrl = 'http://185.2.14.80:8094/';
 
     
     handleError = (error) => {
@@ -34,7 +35,7 @@ class BaseService {
     // }
 
     post(path, payload) {
-        path = this.baseUrl + path;
+        path = this.baseUrl +"api"+ path;
         return axios.request({
             method: 'POST',
             url: path,
