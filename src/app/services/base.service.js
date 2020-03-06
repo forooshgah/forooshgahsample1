@@ -2,8 +2,8 @@ import axios from 'axios';
 
 class BaseService {
     
-    baseUrl = 'https://localhost:44312/';
-    //baseUrl = 'http://185.2.14.80:8094/';
+    //baseUrl = 'https://localhost:44312/';
+    baseUrl = 'http://185.2.14.80:8094/';
 
     
     handleError = (error) => {
