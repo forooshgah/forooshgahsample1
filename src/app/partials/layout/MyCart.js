@@ -8,6 +8,7 @@ import { ReactComponent as CartNum3Icon } from "../../../_metronic/layout/assets
 import { useSelector, useDispatch } from "react-redux";
 import baseService from "../../services/base.service"
 import { cartActions } from "../../store/ducks/cart.duck";
+import { Badge } from "@material-ui/core";
 
 const perfectScrollbarOptions = {
   wheelSpeed: 2,
@@ -100,10 +101,10 @@ const MyCart = (props) => {
         </div>
         <div className="kt-mycart__button kt-align-right">
           <Link
-                to="/checkout"
-                className="btn btn-primary btn-sm"
-              >
-                Checkout
+            to="/checkout"
+            className="btn btn-primary btn-sm"
+          >
+            Checkout
               </Link>
         </div>
       </div>
@@ -114,25 +115,28 @@ const MyCart = (props) => {
 
 
   return (
+
     <Dropdown className="kt-header__topbar-item" drop="down" alignRight>
       <Dropdown.Toggle as={HeaderDropdownToggle} id="dropdown-toggle-my-cart">
-        <span
-          className={clsx("kt-header__topbar-icon", {
-            "kt-header__topbar-icon--brand": iconType === "brand"
-          })}
-        >
-          {!useSVG && <i className={icon} />}
+        <Badge color="secondary" badgeContent={count} >
+          <span
+            className={clsx("kt-header__topbar-icon", {
+              "kt-header__topbar-icon--brand": iconType === "brand"
+            })}
+          >
+            {!useSVG && <i className={icon} />}
 
-          {useSVG && (
-            <span
-              className={clsx("kt-svg-icon", {
-                "kt-svg-icon-brand": iconType === "brand"
-              })}
-            >
-              <CartNum3Icon className="kt-svg-icon kt-svg-icon--primary" />
-            </span>
-          )}
-        </span>
+            {useSVG && (
+              <span
+                className={clsx("kt-svg-icon", {
+                  "kt-svg-icon-brand": iconType === "brand"
+                })}
+              >
+                <CartNum3Icon className="kt-svg-icon kt-svg-icon--primary" />
+              </span>
+            )}
+          </span>
+        </Badge>
       </Dropdown.Toggle>
       <Dropdown.Menu className="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
         <form className="flex-column p-0">
@@ -168,6 +172,7 @@ const MyCart = (props) => {
         </form>
       </Dropdown.Menu>
     </Dropdown>
+
   );
 
 }

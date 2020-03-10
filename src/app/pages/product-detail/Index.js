@@ -80,7 +80,7 @@ const ProductDetail = props => {
 
 const useStyles = makeStyles({
     title: {
-        fontSize: "3rem",
+        fontSize: "2rem",
         fontFamily: "sans-serif",
     },
     desc: {

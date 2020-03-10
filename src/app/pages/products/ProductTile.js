@@ -2,48 +2,60 @@ import React from "react"
 import ProductTileImage from "./productTileImage"
 import ProductTileAddToCart from "./productTileAddToCart";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/styles";
 // TODO: must move to right folder
 //
 const ProductTile = (props) => {
 
+    const { product } = props
+    
     let price
-    if (props.product.priceAfterDiscount > 0) {
+    if (product.discount > 0) {
         price = (<>
-            <span style={{ textDecorationLine: "line-through", color: "#bbbbbb" }}>{props.product.price.toLocaleString()} $</span>
-            <span >{props.product.priceAfterDiscount.toLocaleString()} $</span>
+            <span style={{ textDecorationLine: "line-through", color: "#bbbbbb" }}>{product.price.toLocaleString()} $</span>
+            <span >{product.finalPrice.toLocaleString()} $</span>
         </>
         );
     } else {
         price = (<>
-            <span>{props.product.price.toLocaleString()} $</span>
+            <span>{product.finalPrice.toLocaleString()} $</span>
         </>
         );
     }
 
 
 
+
     return (
-        <Link to={"/Product/"+ props.product.id} className="prod-tile" key={props.product.id}>
-            <ProductTileImage product={props.product} />
-            <div className="prod-tile-name">
-                {props.product.name}
-            </div>
-            <div className="prod-tile-desc">
-                {props.product.brandName}
-            </div>
-            <div className="prod-tile-attrs">
-                <ul>
-                    <li>Lorem Ipsum placeholder text for use in your graphic</li>
-                    <li>placeholder text for use in your graphic</li>
-                    <li>text for use</li>
-                </ul>
-            </div>
-            <div className="prod-tile-price">
-                {price}
-            </div>
-            <ProductTileAddToCart product={props.product} />
-        </Link>
+        <div className="prod-tile">
+            <Link to={"/Product/" + product.id}  key={product.id}>
+                <ProductTileImage product={product} />
+                <div className="prod-tile-name">
+                    {product.name}
+                </div>
+                <div className="prod-tile-desc">
+                    {product.brandName}
+                </div>
+                <div className="prod-tile-attrs">
+                    <ul>
+                        <li className={product.shortDesc1 ? '' : 'hidden'}>{product.shortDesc1}</li>
+                        <li className={product.shortDesc2 ? '' : 'hidden'}>{product.shortDesc2}</li>
+                        <li className={product.shortDesc3 ? '' : 'hidden'}>{product.shortDesc3}</li>
+                    </ul>
+                </div>
+                <div className="prod-tile-price">
+                    {price}
+                </div>
+            </Link>
+            <ProductTileAddToCart product={product} />
+
+        </div>
     );
 }
+
+const useStyle = makeStyles({
+
+
+});
 
 export default ProductTile;

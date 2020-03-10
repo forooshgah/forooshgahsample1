@@ -12,7 +12,6 @@ import {
   PortletHeader,
   PortletHeaderToolbar
 } from "../../partials/content/Portlet";
-import { CodeBlock } from "../../partials/content/CodeExample";
 import Notice from "../../partials/content/Notice";
 
 const localStorageActiveTabKey = "builderActiveTab";
@@ -404,11 +403,12 @@ export default function Builder() {
               />
 
               <PortletBody>
-                <CodeBlock
+              {JSON.stringify(values, null, 2)}
+                {/* <CodeBlock
                   disableCopy="true"
                   language="json"
                   code={JSON.stringify(values, null, 2)}
-                />
+                /> */}
               </PortletBody>
             </Portlet>
           </div>

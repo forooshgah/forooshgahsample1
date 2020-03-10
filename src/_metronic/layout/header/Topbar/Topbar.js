@@ -26,13 +26,14 @@ class Topbar extends React.Component {
       <div className="kt-header__topbar">
 
         <MyCart
-          icon={toAbsoluteUrl("/media/icons/svg/Shopping/Cart%233.svg")}
+          // icon={toAbsoluteUrl("/media/icons/svg/Shopping/Cart%232.svg")}
+          icon="fa fa-shopping-cart fa-2x"
           iconType=""
-          useSVG="true"
+          useSVG={false}
           bgImage={toAbsoluteUrl("/media/misc/bg-1.jpg")}
         />
 
-        <UserNotifications
+        {/* <UserNotifications
           bgImage={toAbsoluteUrl("/media/misc/bg-1.jpg")}
           pulse="true"
           pulseLight="false"
@@ -42,18 +43,18 @@ class Topbar extends React.Component {
           type="success"
           useSVG="true"
           dot="false"
-        />
+        /> */}
 
-        <QuickActionsPanel
+        {/* <QuickActionsPanel
           bgImage={toAbsoluteUrl("/media/misc/bg-2.jpg")}
           skin="dark"
           iconType=""
           icon={toAbsoluteUrl("/media/icons/svg/Media/Equalizer.svg")}
           useSVG="true"
           gridNavSkin="light"
-        />
+        /> */}
 
-        <QuickPanelToggler />
+        {/* <QuickPanelToggler /> */}
 
         <LanguageSelector iconType="" />
 
