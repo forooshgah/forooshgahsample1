@@ -1,14 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react"
-import { Grid, CircularProgress, makeStyles, Button, colors } from "@material-ui/core";
-import { getProduct } from "../../services/product.service"
+import React, { useEffect, useState } from "react"
+import { Grid, CircularProgress, makeStyles, Button, colors, Paper, ListItem, List, ListItemIcon, ListItemText, LinearProgress } from "@material-ui/core";
+import { getProduct, getProductDesc } from "../../services/product.service"
 import { useParams } from "react-router-dom";
 import ProductImages from "./ProductImages"
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/ducks/cart.duck";
+import { LayoutSubheader } from "../../../_metronic";
+import DoneIcon from '@material-ui/icons/Done';
+import { Badge } from "react-bootstrap";
+import { Portlet, PortletHeader, PortletBody } from "../../partials/content/Portlet";
 const ProductDetail = props => {
 
     const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [productDesc, setProductDesc] = useState(null);
+    const [loading, setLoading] = useState({ main: false, desc: false });
 
     const { id } = useParams();
     const classes = useStyles();
@@ -16,19 +21,30 @@ const ProductDetail = props => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setLoading(true);
+        setLoading({ main: true, desc: true });
         getProduct(parseInt(id)).then(result => {
-            setLoading(false);
+            setLoading({ loading, main: false });
             setProduct(result);
+
+            if (result.productDescriptionId) {
+                getProductDesc(result.productDescriptionId).then(resultdesc => {
+                    setLoading({ loading, desc: false });
+                    setProductDesc(resultdesc);
+                })
+            }
+
         })
+
+
     }, [])
 
-    const addToCartHandler = () =>dispatch(cartActions.addToCart(product));
+    const addToCartHandler = () => dispatch(cartActions.addToCart(product));
 
-
+    LayoutSubheader({ title: "Product ", breadcrumb: [{ page: "/", title: "Electronic" }, { page: "/", title: "Mobile" }] });
 
     let content
-    if (loading) {
+    let htmlContent
+    if (loading.main) {
         content = <CircularProgress />
     } else if (product) {
         let price = 0;
@@ -45,14 +61,36 @@ const ProductDetail = props => {
             );
         }
 
-        content = (<Grid container spacing={4}>
-            <Grid item xs={12} sm={4}>
-                <ProductImages images={product.productImages} />
-            </Grid>
-            <Grid item xs={12} sm={8}>
-                <div className="prod-detail-data">
-                    <div className={classes.title}>{product.name}</div>
-                    <div className={classes.desc}>{product.brandDesc}</div>
+        content = (
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <ProductImages images={product.productImages} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <div className="prod-detail-data">
+                        <div className={classes.title}>{product.name}</div>
+                        <div className={classes.brand}><Badge variant="secondary">{product.brandName}</Badge></div>
+                        <div className={classes.desc}>
+                            <List dense={true}>
+                                {[1, 2, 3, 4, 5].map(i => (
+                                    <ListItem key={i}>
+                                        <ListItemIcon><DoneIcon /></ListItemIcon>
+                                        <ListItemText primary={product["shortDesc" + i]} />
+                                    </ListItem>
+                                ))}
+
+                            </List>
+                        </div>
+                    </div>
+                </Grid>
+                <Grid item xs={12} sm={2} className={classes.actions}>
+                    <div className={classes.instock}>
+                        <i className="fa fa-check fa-3x"></i>
+                        <span>
+
+                            In Stock
+                        </span>
+                    </div>
                     <div className={classes.price}>{price}</div>
                     <div className="">
                         <Button className={classes.addToCart} onClick={() => addToCartHandler()}>
@@ -60,31 +98,74 @@ const ProductDetail = props => {
                             Add To Cart
                             </Button>
                     </div>
-                </div>
-            </Grid>
-        </Grid>)
+                </Grid>
+
+                {/* <Grid item xs={12}>
+                    {htmlDesc}
+                </Grid> */}
+            </Grid>)
     } else {
         content = <div>Nothing to do here</div>
     }
 
+    if (loading.desc) {
+        htmlContent = (<LinearProgress />)
+    } else if (productDesc) {
+        htmlContent = (productDesc);
+    } else {
+        htmlContent = (<>No Html Content available</>)
+    }
+
 
     return (
-        <div className="prod-detail-page">
-            <div>
-                {/* bread crum>?! */}
-            </div>
-            {content}
-        </div>
+        <>
+            <Paper className={classes.root} >
+                {content}
+            </Paper>
+
+            <Portlet fluidHeight={true} className={classes.descContainer} >
+                <PortletHeader
+                    title="Product Description"
+                />
+
+                <PortletBody>
+                    {htmlContent}
+                </PortletBody>
+            </Portlet>
+        </>
+
     );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(2)
+    },
+    descContainer: {
+        marginTop: theme.spacing(2)
+    },
     title: {
         fontSize: "2rem",
         fontFamily: "sans-serif",
     },
-    desc: {
-        color: "#bbb"
+    price: {
+        color: "red",
+        fontSize: "3rem",
+        marginTop: "100px;"
+    },
+    actions: {
+        textAlign: "center"
+    },
+    instock: {
+        textAlign: "center",
+        paddingTop: "20px",
+        "& i": {
+            color: "green",
+            margin: "5px"
+        },
+        "& span": {
+
+        }
     },
     addToCart: {
         background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
@@ -95,7 +176,7 @@ const useStyles = makeStyles({
         padding: '0 30px',
         margin: 8,
     }
-});
+}));
 
 
 export default ProductDetail

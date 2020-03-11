@@ -2,6 +2,15 @@ $tile-height : 540px;
 $tile-img-height : 289px;
 
 
+@media (min-width: 1025px){
+    .kt-header .kt-header__top{
+        height: 90px;
+    }
+    .kt-header .kt-header__bottom{
+        height: 60px;
+    }
+}
+
 
 .kt-content{
     padding-bottom: 15px;

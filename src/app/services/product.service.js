@@ -8,6 +8,10 @@ export function getProduct(id){
     return baseService.post('/Product/get', {id});
 }
 
+export function getProductDesc(prouctDescId){
+    return baseService.post('/Product/getDesc', {id : prouctDescId});
+}
+
 export function mostViewedProduct(){
     return baseService.post('/Product/search', {});
 }
