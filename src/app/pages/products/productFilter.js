@@ -2,6 +2,9 @@ import React from 'react'
 
 const ProductFilter = () => {
 
+
+
+    
     return (
         <>
         <h3>Color</h3>
