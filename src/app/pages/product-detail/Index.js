@@ -111,7 +111,9 @@ const ProductDetail = props => {
     if (loading.desc) {
         htmlContent = (<LinearProgress />)
     } else if (productDesc) {
-        htmlContent = (productDesc);
+        htmlContent = (<div dangerouslySetInnerHTML={{
+            __html: productDesc.content}}></div>
+            );
     } else {
         htmlContent = (<>No Html Content available</>)
     }
