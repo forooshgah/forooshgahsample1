@@ -5,6 +5,8 @@
 // Theme Styles
 @import "./_metronic/_assets/sass/style.react.scss";
 
-// Custom
 
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+// Custom
 @import "./sass/style.custom.scss";

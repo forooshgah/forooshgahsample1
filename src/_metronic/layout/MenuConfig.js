@@ -28,6 +28,20 @@ export default {
           },
         ]
       },
+      {
+        title: "About",
+        root: true,
+        alignment: "left",
+        page: "home2",
+        translate: "MENU.About"
+      },
+      {
+        title: "Contacts",
+        root: true,
+        alignment: "left",
+        page: "home4",
+        translate: "MENU.About"
+      },
     ]
   },
   aside: {}

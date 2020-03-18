@@ -1,15 +1,5 @@
-$tile-height : 540px;
-$tile-img-height : 289px;
-
-
-@media (min-width: 1025px){
-    .kt-header .kt-header__top{
-        height: 90px;
-    }
-    .kt-header .kt-header__bottom{
-        height: 60px;
-    }
-}
+$tile-height : 440px;
+$tile-img-height : 170px;
 
 
 .kt-content{
@@ -22,16 +12,16 @@ $tile-img-height : 289px;
 }
 
 .prod-tile{
-    padding: 10px;
-    box-shadow: 0px 0px 4px 5px #f5f5f5;
+    padding: 20px;
+    box-shadow: 0px 0px 2px 3px #f5f5f5;
     background-color: #ffffff;
     height: $tile-height;
     display: block;
-    transition: box-shadow .3s ease-in-out;
-    border-radius: 5px;
+    transition: box-shadow .2s ease-in-out;
+    border-radius: 1px;
 }
 .prod-tile:hover{
-    box-shadow: 0px 0px 6px 6px #afafaf;
+    box-shadow: 0px 0px 3px 4px #f0f0f0;
 }
 
 
@@ -41,23 +31,23 @@ $tile-img-height : 289px;
 }
 
 .prod-tile-name{
-    font-size: 1.5rem;
+    margin-top: 5px;
+    font-size: 1.2rem;
     font-family: Poppins, Helvetica, sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     height: 56px;
     overflow: hidden;
 }
 
 .prod-tile-desc{
-    font-size: 0.9rem;
-    color: #505050;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    font-size: 0.8rem;
+    color: #a7a7a7;
+    margin-bottom: 8px;
 }
 
 .prod-tile-attrs{
     
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: #707070;
     height: 60px;
     overflow: hidden;

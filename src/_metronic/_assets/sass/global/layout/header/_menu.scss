@@ -72,9 +72,9 @@
 				> .kt-menu__item {
 					> .kt-menu__link {
 						@include kt-rounded {
-							border-radius: $kt-border-radius;
+							border-radius: 4px 4px 0px 0px;
 						}
-
+						background-color: #0096db;
 						padding: 0.75rem 1.45rem;
 					}
 

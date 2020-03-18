@@ -62,32 +62,35 @@ const ProductDetail = props => {
         }
 
         content = (
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
-                    <ProductImages images={product.productImages} />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <div className="prod-detail-data">
-                        <div className={classes.title}>{product.name}</div>
-                        <div className={classes.brand}><Badge variant="secondary">{product.brandName}</Badge></div>
-                        <div className={classes.desc}>
-                            <List dense={true}>
-                                {[1, 2, 3, 4, 5].map(i => (
-                                    <ListItem key={i}>
-                                        <ListItemIcon><DoneIcon /></ListItemIcon>
-                                        <ListItemText primary={product["shortDesc" + i]} />
-                                    </ListItem>
-                                ))}
+            <Grid container spacing={0}>
+                <Grid item xs={12} sm={9}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                            <div className={classes.title}>{product.name}</div>
+                            <div className={classes.brand}><Badge variant="secondary">{product.brandName}</Badge></div>
+                        </Grid>
+                        <Grid item xs={12} sm={5}>
+                            <div className={classes.desc}>
+                                <List dense={true}>
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <ListItem key={i}>
+                                            <ListItemIcon><DoneIcon /></ListItemIcon>
+                                            <ListItemText primary={product["shortDesc" + i]} />
+                                        </ListItem>
+                                    ))}
 
-                            </List>
-                        </div>
-                    </div>
+                                </List>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} sm={7}>
+                            <ProductImages images={product.productImages} />
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={2} className={classes.actions}>
+                <Grid item xs={12} sm={3} className={classes.actions}>
                     <div className={classes.instock}>
                         <i className="fa fa-check fa-3x"></i>
                         <span>
-
                             In Stock
                         </span>
                     </div>
@@ -96,14 +99,11 @@ const ProductDetail = props => {
                         <Button className={classes.addToCart} onClick={() => addToCartHandler()}>
                             <i className="fa fa-cart-plus fa-lg"></i> &nbsp;
                             Add To Cart
-                            </Button>
+                        </Button>
                     </div>
                 </Grid>
-
-                {/* <Grid item xs={12}>
-                    {htmlDesc}
-                </Grid> */}
-            </Grid>)
+            </Grid>
+        )
     } else {
         content = <div>Nothing to do here</div>
     }
@@ -112,8 +112,9 @@ const ProductDetail = props => {
         htmlContent = (<LinearProgress />)
     } else if (productDesc) {
         htmlContent = (<div dangerouslySetInnerHTML={{
-            __html: productDesc.content}}></div>
-            );
+            __html: productDesc.content
+        }}></div>
+        );
     } else {
         htmlContent = (<>No Html Content available</>)
     }

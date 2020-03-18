@@ -11,10 +11,10 @@ $kt-header-config: (
 		desktop: (
 			default: (
 				height: (
-					top: 110px,
-					bottom: 70px 
+					top: 80px,
+					bottom: 45px 
 				),		
-				bg-color: #2b2a35,				
+				bg-color: #d0d0d0,				
 				shadow: 0px 0px 40px 0px rgba(82,63,105,0.25)
 			),
 			
@@ -281,9 +281,9 @@ $kt-header-config: (
 							self: (
 								bg-color: (
 									default: none,
-									active: kt-brand-color(),
+									active: #fff,
 									here: kt-brand-color(),
-									hover: #232337,
+									hover: #00628f,
 								)
 							),	
 							// link icon
@@ -317,9 +317,9 @@ $kt-header-config: (
 							// link text
 							text: (
 								font-color:	(
-									default: #6c6e86,
-									active: #ffffff,
-									here: #ffffff,
+									default: #fff,
+									active: #000,
+									here: #000,
 									hover: #ffffff
 								)
 							),

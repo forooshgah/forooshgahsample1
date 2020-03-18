@@ -13,13 +13,13 @@
 
 	// link
 	> .kt-menu__link {
-		transition: all 0.3s ease;
+		transition: all 0.1s ease;
 		cursor: pointer;
 		@include kt-attr(padding, kt-get($item, link, self, padding));
 		@include kt-attr(margin, kt-get($item, link, self, margin));
 
 		&:hover {
-			transition: all 0.3s ease;
+			transition: all 0.1s ease;
 		}
 
 		// link icon

@@ -63,12 +63,12 @@ const ProductExplore = props =>{
     return (
         <>
             <ProductSearch  text={filter.text} onSearchText={onSearchText} />
-            <Grid container spacing={3}>
-                <Grid item xs={2}>
+            <Grid container spacing={2}>
+                <Grid item xs={5} sm={3} md={3}>
                     <BrandFilter brandChangeHandler={onSearchBrand} />
                     <CategoryFilter categorySelectHandler={onSearchCategory} />
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={7} sm={9} md={9}>
                     <ProductList filter={filter} />
                 </Grid>
             </Grid>
