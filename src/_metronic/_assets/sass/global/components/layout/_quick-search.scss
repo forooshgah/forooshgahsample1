@@ -6,12 +6,14 @@
 
 
 .kt-quick-search {
+	flex-grow: 1;
+	max-width: 50%;
 	// Form
 	.kt-quick-search__form {
 		padding: 0;
 
 		.input-group {
-			background-color: transparent;
+			background-color: #fff;
 		}
 
 		.input-group-prepend,
@@ -21,17 +23,24 @@
 				background-color: transparent;
 				border: 0;
 			}
+			.input-group-btn {
+				width: 50px;
+				text-align: center;
+				border: 1px solid rgb(155, 155, 155);
+				background-color: rgb(204, 204, 204);
+				&:hover{
+					background-color: rgb(184, 184, 184);
+				}
+			}
 		}
 
 		.form-control {
 			@include kt-input-reset();
 		    background-color: transparent;
-		    padding-left: 0;
 			padding-right: 0;
 			border-top: 0;
 			border-left: 0;
 			border-right: 0;
-			padding: 0;
 			border-radius: 0;
 		}
 

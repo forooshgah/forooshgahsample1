@@ -1,60 +1,73 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ProductSearch from "./productSearch";
 import ProductList from "./productList";
 import { Grid } from "@material-ui/core";
 import BrandFilter from "./brandFilter";
 import CategoryFilter from "./categoryFilter";
+import { useParams } from "react-router-dom";
 
 
-const ProductExplore = props =>{
+const ProductExplore = props => {
 
-    const [filter, setFilter] = useState({text:null, brandIds:[]});
-    const onSearchText = (text) => {
+    const { search } = useParams()
+    const [filter, setFilter] = useState({ name: search, brandIds: [] });
+
+
+    useEffect(() => {
         setFilter(prev => (
             {                    // object that we want to update
-                ...prev,  // keep all other key-value pairs
-                name: text       // update the value of specific key
+                ...prev,        // keep all other key-value pairs
+                name: search       // update the value of specific key
             }
         ));
-    }
+    }, [search])
+
+    // const onSearchText = (text) => {
+    //     setFilter(prev => (
+    //         {                    // object that we want to update
+    //             ...prev,  // keep all other key-value pairs
+    //             name: text       // update the value of specific key
+    //         }
+    //     ));
+    // }
 
     const onSearchBrand = (brandId, checked) => {
-        if(checked){
+        if (checked) {
             setFilter(prev => (
-                {                    
-                    ...prev,  
+                {
+                    ...prev,
                     brandIds: [
                         ...prev.brandIds,
                         brandId
-                    ]       
+                    ]
                 }
             ));
-        }else{
+        } else {
             setFilter(prev => (
-                {                    
-                    ...prev,  
-                    brandIds: prev.brandIds.filter(x => x != brandId)  
+                {
+                    ...prev,
+                    brandIds: prev.brandIds.filter(x => x != brandId)
                 }
             ));
         }
     }
 
     const onSearchCategory = (catId, checked) => {
-        if(checked){
+        if (checked) {
             setFilter(prev => (
-                {                    
-                    ...prev,  
+                {
+                    ...prev,
                     categoryIds: [
                         ...prev.brandIds,
                         catId
-                    ]       
+                    ]
                 }
             ));
-        }else{
+        } else {
             setFilter(prev => (
-                {                    
-                    ...prev,  
-                    categoryIds: prev.categoryIds.filter(x => x != catId)  
+                {
+                    ...prev,
+                    categoryIds: prev.categoryIds.filter(x => x != catId)
                 }
             ));
         }
@@ -62,7 +75,7 @@ const ProductExplore = props =>{
 
     return (
         <>
-            <ProductSearch  text={filter.text} onSearchText={onSearchText} />
+            {/* <ProductSearch  text={filter.text} onSearchText={onSearchText} /> */}
             <Grid container spacing={2}>
                 <Grid item xs={5} sm={3} md={3}>
                     <BrandFilter brandChangeHandler={onSearchBrand} />

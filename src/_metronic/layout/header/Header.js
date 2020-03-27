@@ -7,6 +7,7 @@ import HMenu from "./HMenu/HMenu";
 import AnimateLoading from "../../../app/partials/layout/AnimateLoading";
 import KTHeader from "../../_assets/js/header";
 import * as builder from "../../ducks/builder";
+import SearchInput from "../../../app/partials/layout/SearchInput";
 
 class Header extends React.Component {
   headerCommonRef = React.createRef();
@@ -64,6 +65,7 @@ class Header extends React.Component {
         <div className="kt-header__top">
           <div className={`kt-container ${headerContainerClasses}`}>
             <Brand />
+            <SearchInput useSVG="false" />
             <Topbar />
           </div>
         </div>
