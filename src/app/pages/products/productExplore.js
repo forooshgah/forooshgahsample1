@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react"
 import ProductSearch from "./productSearch";
 import ProductList from "./productList";
-import { Grid } from "@material-ui/core";
+import { Grid, Divider } from "@material-ui/core";
 import BrandFilter from "./brandFilter";
 import CategoryFilter from "./categoryFilter";
 import { useParams } from "react-router-dom";
+import { LayoutSubheader } from "../../../_metronic";
 
 
 const ProductExplore = props => {
+
+    LayoutSubheader({ title: "Product Explorer"});
 
     const { search } = useParams()
     const [filter, setFilter] = useState({ name: search, brandIds: [] });
@@ -77,14 +80,19 @@ const ProductExplore = props => {
         <>
             {/* <ProductSearch  text={filter.text} onSearchText={onSearchText} /> */}
             <Grid container spacing={2}>
-                <Grid item xs={5} sm={3} md={3}
-                    container
-                    direction="column"
-                    justify="flex-start"
-                    alignItems="stretch"
-                >
-                    <BrandFilter brandChangeHandler={onSearchBrand} />
-                    <CategoryFilter categorySelectHandler={onSearchCategory} />
+                <Grid item xs={5} sm={3} md={3} >
+                    <Grid
+                        container
+                        direction="column"
+                        justify="flex-start"
+                        alignItems="stretch"
+                        className="filter-container"
+                    >
+                        <BrandFilter brandChangeHandler={onSearchBrand} />
+                        <Divider variant="middle" />
+                        <CategoryFilter categorySelectHandler={onSearchCategory} />
+                        <Divider variant="middle" />
+                    </Grid>
                 </Grid>
                 <Grid item xs={7} sm={9} md={9}>
                     <ProductList filter={filter} />
