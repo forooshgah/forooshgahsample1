@@ -11,12 +11,10 @@ const ProductTileAddToCart = (props) => {
     const addToCart = () => dispatch(cartActions.addToCart(props.product));
 
     return (
-        <div className="prod-tile-addCart">
-            <Button  variant="contained" color="primary" size="large" fullWidth={true} onClick={addToCart}>
-                <i className="fa fa-cart-plus fa-2x"> </i> &nbsp;
-                Add to cart
+        <Button variant="contained" color="primary" fullWidth={true} onClick={addToCart}>
+            <i className="fa fa-cart-plus fa-lg"> </i> &nbsp;
+            Add to cart
             </Button>
-        </div>
     );
 }
 

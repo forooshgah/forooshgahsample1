@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/ducks/cart.duck";
 import { LayoutSubheader } from "../../../_metronic";
 import DoneIcon from '@material-ui/icons/Done';
-import { Badge } from "react-bootstrap";
+import { Badge, ListGroup, Button as BButton } from "react-bootstrap";
 import { Portlet, PortletHeader, PortletBody } from "../../partials/content/Portlet";
 const ProductDetail = props => {
 
@@ -62,22 +62,29 @@ const ProductDetail = props => {
         }
 
         content = (
-            <Grid container spacing={0}>
+            <Grid container spacing={1}>
                 <Grid item xs={12} sm={9}>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <div className={classes.title}>{product.name}</div>
-                            <div className={classes.brand}><Badge variant="secondary">{product.brandName}</Badge></div>
+                            <div className="prod-tile-desc">
+                                <BButton variant="outline-dark">{product.categoryName}</BButton>
+                                <BButton variant="outline-dark">{product.brandName}</BButton>
+                            </div>
                         </Grid>
                         <Grid item xs={12} sm={5}>
                             <div className={classes.desc}>
                                 <List dense={true}>
-                                    {[1, 2, 3, 4, 5].map(i => (
-                                        <ListItem key={i}>
-                                            <ListItemIcon><DoneIcon /></ListItemIcon>
-                                            <ListItemText primary={product["shortDesc" + i]} />
-                                        </ListItem>
-                                    ))}
+                                    {[1, 2, 3, 4, 5].map(i => {
+                                        if (product["shortDesc" + i] == null) {
+                                            return null;
+                                        }
+                                        return (
+                                            <ListItem key={i}>
+                                                <ListItemIcon><DoneIcon /></ListItemIcon>
+                                                <ListItemText disableTypography={true} className={classes.attrs} primary={product["shortDesc" + i]} />
+                                            </ListItem>);
+                                    })}
 
                                 </List>
                             </div>
@@ -88,19 +95,35 @@ const ProductDetail = props => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={3} className={classes.actions}>
-                    <div className={classes.instock}>
-                        <i className="fa fa-check fa-3x"></i>
-                        <span>
-                            In Stock
-                        </span>
-                    </div>
-                    <div className={classes.price}>{price}</div>
-                    <div className="">
-                        <Button className={classes.addToCart} onClick={() => addToCartHandler()}>
-                            <i className="fa fa-cart-plus fa-lg"></i> &nbsp;
-                            Add To Cart
+                    <ListGroup>
+                        <ListGroup.Item>
+                            <div className={classes.instock}>
+                                <i className="fa fa-check fa-lg"></i>
+                                <span>
+                                    In Stock
+                                </span>
+                            </div>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            something
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            something
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            something
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <div className={classes.price}>{price}</div>
+
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Button className={classes.addToCart} onClick={() => addToCartHandler()}>
+                                <i className="fa fa-cart-plus fa-lg"></i> &nbsp;
+                                Add To Cart
                         </Button>
-                    </div>
+                        </ListGroup.Item>
+                    </ListGroup>
                 </Grid>
             </Grid>
         )
@@ -150,6 +173,9 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontSize: "2rem",
         fontFamily: "sans-serif",
+    },
+    attrs: {
+        fontSize: "1.1rem !important",
     },
     price: {
         color: "red",

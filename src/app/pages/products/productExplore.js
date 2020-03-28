@@ -77,7 +77,12 @@ const ProductExplore = props => {
         <>
             {/* <ProductSearch  text={filter.text} onSearchText={onSearchText} /> */}
             <Grid container spacing={2}>
-                <Grid item xs={5} sm={3} md={3}>
+                <Grid item xs={5} sm={3} md={3}
+                    container
+                    direction="column"
+                    justify="flex-start"
+                    alignItems="stretch"
+                >
                     <BrandFilter brandChangeHandler={onSearchBrand} />
                     <CategoryFilter categorySelectHandler={onSearchCategory} />
                 </Grid>
